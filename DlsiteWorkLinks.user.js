@@ -75,12 +75,18 @@
             default: return null;
         }
     }
-
+    
+    const displace = (item) => {
+        [['adult', 'R18'], ['general', '全年龄'], ['r15', 'R15']].forEach(target => {
+            item = item === target[0] ? target[1] : item
+        })
+        return item
+    }
+    
     function getXmlHttpRequest() {
         return (typeof GM !== "undefined" && GM !== null ? GM.xmlHttpRequest : GM_xmlhttpRequest);
     }
 
-    let dlwork = []
     const Parser = {
         walkNodes: function (elem) {
             const rjNodeTreeWalker = document.createTreeWalker(
@@ -157,7 +163,7 @@
                 }
                 let substring;
                 let num = matches[i].value.length
-                if (substring = nodeOriginalText.substring(matches[i].index+num, upper)) {
+                if (substring = nodeOriginalText.substring(matches[i].index + num, upper)) {
                     const subtextNode = document.createTextNode(substring);
                     textNode.parentNode.insertBefore(
                         subtextNode,
@@ -317,13 +323,13 @@
             workInfo.title = dom[0].work_name
             workInfo.circle = dom[0].maker_name
             workInfo.date = dom[0].regist_date
-            workInfo.rating = dom[0].age_category_string
+            workInfo.rating = displace(dom[0].age_category_string)
             workInfo.tags = dom[0].genres.map(r => {
                 return r.name + ' '
             })
             workInfo.cv = dom[0].creaters.voice_by ? dom[0].creaters.voice_by.map(r => {
                 return r.name + ' '
-            }) : '无cv'
+            }) : '无CV'
             workInfo.filesize = dom[0].contents[0].file_size_unit
 
             workInfo.types = dom[0].work_type_string
