@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name        dlworkLinks
+// @name        DlsiteWorkLinks
 // @namespace   original:Sanya
 // @description Makes RJ codes more useful.
 // @include     *://*/*
