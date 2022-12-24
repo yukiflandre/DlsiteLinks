@@ -13,7 +13,7 @@
 
 (function () {
     'use strict';
-    const RJ_REGEX = new RegExp("[BRV][JE][0-9]{6,9}", "gi");
+    const RJ_REGEX = new RegExp("[BRV][JE][0-9]{6,8}", "gi");
     const VOICELINK_CLASS = 'voicelink';
     const RJCODE_ATTRIBUTE = 'rjcode';
     const css = `
