@@ -83,7 +83,7 @@
         return item
     }
     
-    const ByteToGb = (bytes) => {
+    const byteToGb = (bytes) => {
         const GB = 1073741824;
         const MB = 1048576;
         function convertAndRound(bytes) {
@@ -344,7 +344,7 @@
             workInfo.cv = dom[0].creaters.voice_by ? dom[0].creaters.voice_by.map(r => {
                 return r.name + ' '
             }) : '无CV'
-            workInfo.filesize = ByteToGbdom([0].contents_file_size)
+            workInfo.filesize = byteToGb(dom[0].contents_file_size)
 
             workInfo.types = dom[0].work_type_string
 
