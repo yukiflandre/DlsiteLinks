@@ -75,26 +75,24 @@
             default: return null;
         }
     }
-    
-    const displace = (item) => {
+    function displace(item){
+
         [['adult', 'R18'], ['general', '全年龄'], ['r15', 'R15']].forEach(target => {
             item = item === target[0] ? target[1] : item
         })
         return item
+
     }
-    
-    const byteToGb = (bytes) => {
+    function convertAndRound(bytes) {
         const GB = 1073741824;
         const MB = 1048576;
-        function convertAndRound(bytes) {
-          let result;
-          if (bytes >= GB) {
+        let result;
+        if (bytes >= GB) {
             result = (bytes / GB).toFixed(2) + " GB";
-          } else {
+        } else {
             result = (bytes / MB).toFixed(2) + " MB";
-          }
-          return result;
         }
+        return result;
     }
     
     function getXmlHttpRequest() {
@@ -329,6 +327,7 @@
             // }
 
             const workInfo = {};
+            console.log(dom[0].contents_file_size)
             workInfo.rj = rj;
 
             workInfo.img = `https://img.dlsite.jp/modpub/images2/work/${dom[0].image_main.path_short}`
@@ -344,7 +343,7 @@
             workInfo.cv = dom[0].creaters.voice_by ? dom[0].creaters.voice_by.map(r => {
                 return r.name + ' '
             }) : '无CV'
-            workInfo.filesize = byteToGb(dom[0].contents_file_size)
+            workInfo.filesize = convertAndRound(dom[0].contents_file_size)
 
             workInfo.types = dom[0].work_type_string
 
