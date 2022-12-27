@@ -3,7 +3,7 @@
 // @namespace   original:Sanya
 // @description Makes RJ codes more useful.
 // @include     *://*/*
-// @version     2.1.0
+// @version     2.1.1
 // @grant       GM.xmlHttpRequest
 // @grant       GM_xmlhttpRequest
 // @updateURL   https://github.com/yukiflandre/DlsiteLinks/raw/main/dlworkLinks.user.js
