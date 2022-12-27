@@ -312,7 +312,7 @@
     }
 
     const DLsite = {
-        parseWorkDOM: function (dom, rj) {
+        parseWorkData: function (json, rj) {
             // workInfo: {
             //     rj: any;
             //     img: string;
@@ -327,25 +327,25 @@
             // }
 
             const workInfo = {};
-            console.log(dom[0].contents_file_size)
+            console.log(json[0].contents_file_size)
             workInfo.rj = rj;
 
-            workInfo.img = `https://img.dlsite.jp/modpub/images2/work/${dom[0].image_main.path_short}`
+            workInfo.img = `https://img.dlsite.jp/modpub/images2/work/${json[0].image_main.path_short}`
 
 
-            workInfo.title = dom[0].work_name
-            workInfo.circle = dom[0].maker_name
-            workInfo.date = dom[0].regist_date
-            workInfo.rating = displace(dom[0].age_category_string)
-            workInfo.tags = dom[0].genres.map(r => {
-                return r.name + ' '
+            workInfo.title = json[0].work_name
+            workInfo.circle = json[0].maker_name
+            workInfo.date = json[0].regist_date
+            workInfo.rating = displace(json[0].age_category_string)
+            workInfo.tags = json[0].genres.map(r => {
+                return r.name
             })
-            workInfo.cv = dom[0].creaters.voice_by ? dom[0].creaters.voice_by.map(r => {
-                return r.name + ' '
+            workInfo.cv = json[0].creaters.voice_by ? json[0].creaters.voice_by.map(r => {
+                return r.name
             }) : '无CV'
-            workInfo.filesize = convertAndRound(dom[0].contents_file_size)
+            workInfo.filesize = convertAndRound(json[0].contents_file_size)
 
-            workInfo.types = dom[0].work_type_string
+            workInfo.types = json[0].work_type_string
 
 
 
@@ -365,7 +365,7 @@
                     if (resp.readyState === 4 && resp.status === 200) {
                         // const dom = new DOMParser().parseFromString(resp.responseText, "text/html");
                         let json = JSON.parse(resp.responseText)
-                        const workInfo = DLsite.parseWorkDOM(json, rjCode);
+                        const workInfo = DLsite.parseWorkData(json, rjCode);
                         callback(workInfo);
                     }
                     else if (resp.readyState === 4 && resp.status === 404)
@@ -385,7 +385,7 @@
                 onload: function (resp) {
                     if (resp.readyState === 4 && resp.status === 200) {
                         let json = JSON.parse(resp.responseText)
-                        const workInfo = DLsite.parseWorkDOM(json, rjCode);
+                        const workInfo = DLsite.parseWorkData(json, rjCode);
                         callback(workInfo);
                     }
                     else if (resp.readyState === 4 && resp.status === 404)
