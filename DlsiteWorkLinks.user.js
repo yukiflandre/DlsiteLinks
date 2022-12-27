@@ -83,6 +83,20 @@
         return item
     }
     
+    const ByteToGb = (bytes) => {
+        const GB = 1073741824;
+        const MB = 1048576;
+        function convertAndRound(bytes) {
+          let result;
+          if (bytes >= GB) {
+            result = (bytes / GB).toFixed(2) + " GB";
+          } else {
+            result = (bytes / MB).toFixed(2) + " MB";
+          }
+          return result;
+        }
+    }
+    
     function getXmlHttpRequest() {
         return (typeof GM !== "undefined" && GM !== null ? GM.xmlHttpRequest : GM_xmlhttpRequest);
     }
@@ -330,7 +344,7 @@
             workInfo.cv = dom[0].creaters.voice_by ? dom[0].creaters.voice_by.map(r => {
                 return r.name + ' '
             }) : '无CV'
-            workInfo.filesize = dom[0].contents[0].file_size_unit
+            workInfo.filesize = ByteToGbdom([0].contents_file_size)
 
             workInfo.types = dom[0].work_type_string
 
