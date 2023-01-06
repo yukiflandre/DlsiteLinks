@@ -75,12 +75,9 @@
             default: return null;
         }
     }
-    function displace(item){
-
-        [['adult', 'R18'], ['general', '全年龄'], ['r15', 'R15']].forEach(target => {
-            item = item === target[0] ? target[1] : item
-        })
-        return item
+    function displace(item) {
+        const target = [['adult', 'R18'], ['general', '全年龄'], ['r15', 'R15']].find(target => target[0] === item);
+        return target ? target[1] : item;
 
     }
     function convertAndRound(bytes) {
@@ -94,7 +91,7 @@
         }
         return result;
     }
-    
+
     function getXmlHttpRequest() {
         return (typeof GM !== "undefined" && GM !== null ? GM.xmlHttpRequest : GM_xmlhttpRequest);
     }
@@ -167,10 +164,10 @@
 
                 // Insert text after if there is any
                 let upper;
-                if (i === matches.length - 1){
-                     upper = undefined;
+                if (i === matches.length - 1) {
+                    upper = undefined;
                 }
-                else{
+                else {
                     upper = matches[i + 1].index;
                 }
                 let substring;
